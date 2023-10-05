@@ -13,18 +13,27 @@ const page = () => {
     console.log(mainTask)
 
   }
-  let renderTask = <h2>No Task Available</h2>
+  const delateHandler = (i) =>{
+    let copytask = [...mainTask]
+    copytask.splice(i,1)
+    setmainTask(copytask)
+  }
 
+
+  let renderTask = <h2>No Task Available</h2>
+ 
    if (mainTask.length>0) {
     renderTask = mainTask.map((t, i) => {
       return(
-      <li className='flex items-center justify-between'>
+      <li key={i} className='flex items-center justify-between'>
         <div className ='flex justify-between mb-5'>
           <h5 className='text-xl font-semibold'> {t.title} </h5>
           <h6 className='text-xl font-semibold'>{t.desc}</h6>
         </div>
-        <button className='bg-red-400  '>Delete</button>
-      </li>);
+        <button onClick={()=>{
+          delateHandler(i)
+        }} className='bg-green-400 rounded'>Delete</button>
+      </li>)
     })
    }
  
